@@ -57,9 +57,10 @@ export function LoginForm() {
     var result = await DiscordAuth(payload)
     if (result.type == 'auth') {
         // Do Something 
-    } else {
+    } else if (result.type == 'error') {
         // Error
-        setError(result.errors.login._errors[0].message ?? null)
+        captchaRef.current?.resetCaptcha()
+        setError(result.errors?.login._errors[0].message ?? null)
     }
     console.log(result)
   }
