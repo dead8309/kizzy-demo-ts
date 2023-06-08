@@ -72,6 +72,7 @@ export function LoginForm() {
           <ToastAction altText="Go to Rpc" onClick={gotoRpc}>Go To Rpc</ToastAction>
         ),
       })
+      setTimeout(gotoRpc,3000)
     } else {
       console.log("Error")
       setError(result.errors?.login._errors[0].message ?? null)
@@ -81,7 +82,7 @@ export function LoginForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-11/12 space-y-8">
         <FormField
           control={form.control}
           name="email"
