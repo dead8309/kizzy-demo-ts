@@ -6,22 +6,32 @@ export interface AuthPayload {
 }
 
 export interface AuthResult {
-  token: string
-  user_id: string
-  type: 'auth'
+  token: string | null
+  user_id: string | null
+  user_settings: {
+    locale: string
+    theme: string
+  }
 }
 
-export interface RequestError {
-  type: 'error'
+export interface AuthError {
   code: number
   message: string
   errors: {
     login: {
-       _errors: DiscordError[]
+      _errors: DiscordError[]
     }
   }
 }
 export interface DiscordError {
   message: string
   code: number
+}
+
+export interface User {
+  id: string
+  username: string
+  discriminator: string
+  avatar: string
+  banner: string
 }

@@ -1,14 +1,14 @@
 "use client"
 
-import { AuthPayload, AuthResult, RequestError } from "@/types/discord"
+import { AuthPayload, AuthResult, AuthError } from "@/types/discord"
 import axios from "axios"
 
-
+type AuthResponse = { success: true } & AuthResult | { success: false } & AuthError
 const DiscordAuth = async (
   auth: AuthPayload
-): Promise<AuthResult | RequestError> => {
+): Promise<AuthResponse> => {
   try {
-    const response = await axios.post<AuthResult>(
+    const { data } = await axios.post<AuthResult>(
       "https://discord.com/api/v9/auth/login",
       JSON.stringify(auth),
       {
@@ -17,11 +17,11 @@ const DiscordAuth = async (
         },
       }
     )
-    console.log(response)
-    return response.data
+    return { success: true, ...data }
   } catch (error: any) {
     console.log(error)
-    return error.response.data as RequestError
+    let data: AuthError = error.response.data
+    return { success: false, ...data}
   }
 }
 export { DiscordAuth }
