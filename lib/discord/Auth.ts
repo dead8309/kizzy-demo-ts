@@ -13,8 +13,7 @@ const DiscordAuth = async (
       JSON.stringify(auth),
       {
         headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin":"https://discord.com"
+          "Content-Type": "application/json"
         },
       }
     )
