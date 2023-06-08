@@ -35,3 +35,4 @@ export interface User {
   avatar: string
   banner: string
 }
+export type AuthResponse = { success: true } & AuthResult | { success: false } & AuthError

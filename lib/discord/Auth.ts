@@ -1,21 +1,15 @@
 "use client"
 
-import { AuthPayload, AuthResult, AuthError } from "@/types/discord"
+import { AuthPayload, AuthResult, AuthError, AuthResponse } from "@/types/discord"
 import axios from "axios"
 
-type AuthResponse = { success: true } & AuthResult | { success: false } & AuthError
 const DiscordAuth = async (
   auth: AuthPayload
 ): Promise<AuthResponse> => {
   try {
     const { data } = await axios.post<AuthResult>(
-      "https://discord.com/api/v9/auth/login",
-      JSON.stringify(auth),
-      {
-        headers: {
-          "Content-Type": "application/json"
-        },
-      }
+      "/api/login",
+      JSON.stringify(auth)
     )
     return { success: true, ...data }
   } catch (error: any) {
