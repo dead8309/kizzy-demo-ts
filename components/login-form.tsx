@@ -1,25 +1,27 @@
 "use client"
 
 import { useRef, useState } from "react"
-import Link from "next/link"
+import { useRouter } from "next/navigation"
 import HCaptcha from "@hcaptcha/react-hcaptcha"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
+import { AuthPayload } from "@/types/discord"
+import { DiscordAuth } from "@/lib/discord/Auth"
+import { GetCurrentUser } from "@/lib/discord/GetCurrentUser"
 import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { DiscordAuth } from "@/lib/discord/Auth"
-import { AuthPayload } from "@/types/discord"
+import { ToastAction } from "@/components/ui/toast"
+import { useToast } from "@/components/ui/use-toast"
 
 const formSchema = z.object({
   email: z.string(),
@@ -27,6 +29,8 @@ const formSchema = z.object({
 })
 
 export function LoginForm() {
+  const { toast } = useToast()
+  const router = useRouter()
   const [token, setToken] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const captchaRef = useRef<HCaptcha>(null)
@@ -34,35 +38,45 @@ export function LoginForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "jsjjsjsjeh773837jsjsje@gmail.com",
-      password: "monu8309",
+      email: "",
+      password: "",
     },
   })
 
-  // 2. Define a submit handler.
+  function gotoRpc() {
+    router.push("/rpc")
+  }
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
     let hCaptchaToken = token
     if (!hCaptchaToken) {
       const response = await captchaRef.current?.execute({ async: true })
       hCaptchaToken = response?.response ?? null
     }
     let payload: AuthPayload = {
-        captcha_key: hCaptchaToken,
-        login: values.email,
-        password: values.password,
-        undelete: false
+      captcha_key: hCaptchaToken,
+      login: values.email,
+      password: values.password,
+      undelete: false,
     }
-    var result = await DiscordAuth(payload)
-    if (result.type == 'auth') {
-        // Do Something 
-    } else if (result.type == 'error') {
-        // Error
-        captchaRef.current?.resetCaptcha()
-        setError(result.errors?.login._errors[0].message ?? null)
-    }
+    let result = await DiscordAuth(payload)
     console.log(result)
+    if (result.success) {
+      console.log("Success")
+      localStorage.setItem("token", result.token ?? "")
+      let user = await GetCurrentUser()
+      toast({
+        title: "Login Successful",
+        description: `Welcome ${user?.username}#${user?.discriminator}`,
+        action: (
+          <ToastAction altText="Go to Rpc" onClick={gotoRpc}>Go To Rpc</ToastAction>
+        ),
+      })
+    } else {
+      console.log("Error")
+      setError(result.errors?.login._errors[0].message ?? null)
+    }
+    captchaRef.current?.resetCaptcha()
   }
 
   return (
@@ -88,11 +102,9 @@ export function LoginForm() {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input placeholder="" {...field} type="password"/>
+                <Input placeholder="" {...field} type="password" />
               </FormControl>
-              <FormMessage>
-                {error ?? ""}
-              </FormMessage>
+              <FormMessage>{error ?? ""}</FormMessage>
             </FormItem>
           )}
         />
