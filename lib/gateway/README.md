@@ -8,7 +8,7 @@
 
 ## About
 
-`kizzy-rpc-ts` is a fork of [discordjs/RPC](https://github.com/discordjs/RPC) with WebSocket support solely made to work for [coc-discord-rpc](https://github.com/leonardssh/coc-discord-rpc) on android devices
+`kizzy-rpc-ts` is a fork of [discordjs/RPC](https://github.com/discordjs/RPC) with WebSocket support
 
 ## Example
 
