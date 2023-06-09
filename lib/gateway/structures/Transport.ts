@@ -15,7 +15,7 @@ export type TransportEvents = {
 
 export abstract class Transport extends (EventEmitter as new () => TypedEmitter<TransportEvents>) {
     
-    get isConnected(): boolean {
+    isConnected(): boolean {
         return false;
     }
 

@@ -30,7 +30,7 @@ export class Client extends (EventEmitter as new () => TypedEmitter<ClientEvents
      */
     user?: ClientUser;
 
-    get isConnected() {
+    isConnected() {
         return this.transport.isConnected;
     }
 

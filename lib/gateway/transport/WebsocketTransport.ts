@@ -6,7 +6,7 @@ import {Transport} from "../structures/Transport";
 export class WebSocketTransport extends Transport {
   private ws?: WebSocket;
 
-  get isConnected() {
+  isConnected() {
     return this.ws != undefined && this.ws.readyState === 1;
   }
 
