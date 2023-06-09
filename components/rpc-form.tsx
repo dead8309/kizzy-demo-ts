@@ -36,8 +36,18 @@ export function RpcForm() {
     resolver: zodResolver(RpcFormSchema),
     defaultValues: {
       name: "",
+      details:"",
+      state:"",
       type: 0,
-      status: 'online'
+      status: 'online',
+      assets: {
+        large_image:"",
+        small_image:""
+      },
+      button1_text:"",
+      button1_url:"",
+      button2_text:"",
+      button2_url:""
     },
   })
   const client = new Client()
