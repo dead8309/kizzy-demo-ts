@@ -2,6 +2,8 @@ import Link from "next/link"
 
 import { siteConfig } from "@/config/site"
 import { buttonVariants } from "@/components/ui/button"
+import { Github } from "lucide-react"
+import { Icons } from "@/components/icons"
 
 export default function IndexPage() {
   return (
@@ -17,17 +19,24 @@ export default function IndexPage() {
       </div>
       <div className="flex gap-4">
         <Link
-        target="_blank"
-        rel="noreferrer"
-        href={siteConfig.links.discord}
-        className={buttonVariants()}
-        >Discord</Link>
+          href="/home"
+          className={buttonVariants()}
+        >Get Started</Link>
+        <Link
+          target="_blank"
+          rel="noreferrer"
+          href={siteConfig.links.discord}
+          className={buttonVariants({ variant: 'secondary' })}
+        >
+          <Icons.discord className="mr-2 h-4 w-4"/>
+          Discord</Link>
         <Link
           target="_blank"
           rel="noreferrer"
           href={siteConfig.links.github}
           className={buttonVariants({ variant: "outline" })}
         >
+          <Icons.gitHub className="mr-2 h-4 w-4" />
           GitHub
         </Link>
       </div>
