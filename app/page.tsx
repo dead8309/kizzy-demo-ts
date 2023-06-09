@@ -13,7 +13,7 @@ export default function IndexPage() {
           Kizzy Rpc
         </h1>
         <p className="max-w-[700px] text-lg text-muted-foreground">
-          Open Source Demo app built with NextJS, Radix Ui, Tailwindcss with
+          Open Source Demo app built with NextJS, Radix Ui, Tailwindcss and
           shadcn components.
         </p>
       </div>
@@ -22,14 +22,6 @@ export default function IndexPage() {
           href="/home"
           className={buttonVariants()}
         >Get Started</Link>
-        <Link
-          target="_blank"
-          rel="noreferrer"
-          href={siteConfig.links.discord}
-          className={buttonVariants({ variant: 'secondary' })}
-        >
-          <Icons.discord className="mr-2 h-4 w-4"/>
-          Discord</Link>
         <Link
           target="_blank"
           rel="noreferrer"
