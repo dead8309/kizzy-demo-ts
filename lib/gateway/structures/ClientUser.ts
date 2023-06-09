@@ -1,4 +1,5 @@
 import { Client } from "../Client"
+import { User } from "../constants/Payload"
 
 export type Activity = {
   application_id?: string
@@ -43,9 +44,14 @@ export class ClientUser {
    * client
    */
   client: Client
+  /**
+   * user 
+   */
+  user: User
 
-  constructor(client: Client) {
+  constructor(client: Client,user: User) {
     this.client = client
+    this.user = user
   }
 
   async setActivity(activity: Activity): Promise<void> {

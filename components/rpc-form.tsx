@@ -28,6 +28,7 @@ import { SwitchBar } from "@/components/switch-bar"
 
 import { use, useEffect, useState } from "react"
 import { Client, ClientUser } from "@/lib/gateway"
+import { toast } from "./ui/use-toast"
 
 export function RpcForm() {
   const [enabled, setEnabled] = useState(false)
@@ -36,28 +37,26 @@ export function RpcForm() {
     resolver: zodResolver(RpcFormSchema),
     defaultValues: {
       name: "",
-      details:"",
-      state:"",
       type: 0,
-      status: 'online',
-      assets: {
-        large_image:"",
-        small_image:""
-      },
-      button1_text:"",
-      button1_url:"",
-      button2_text:"",
-      button2_url:""
+      status: 'online'
     },
   })
   const client = new Client()
   client.on('ready', (user) => {
     setClientUser(user)
+    toast({
+      title: 'Connected To Gateway',
+      description: `Logged in as ${user.user.username}`
+    })
     console.log('Connected To Gateway')
     setEnabled(true)
   })
   client.on('disconnected', () => {
     setClientUser(null)
+    toast({
+      title: 'Disconnected From Gateway',
+      variant: 'destructive'
+    })
     console.warn('Disconnected From Gateway')
     setEnabled(false)
   })
@@ -71,8 +70,9 @@ export function RpcForm() {
     }
   }
   async function onSubmit(values: z.infer<typeof RpcFormSchema>) {
-    console.log(values)
-    console.log(clientUser)
+    toast({
+      description: `Updating Presence`
+    })
     await clientUser?.setActivity({
       name: values.name,
       details: values.details,

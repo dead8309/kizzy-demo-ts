@@ -39,8 +39,8 @@ export class Client extends (EventEmitter as new () => TypedEmitter<ClientEvents
         this.transport = new WebSocketTransport()
         this.transport.on('open', (user) => {
             this.emit('connected')
-            this.user = new ClientUser(this)
-            console.log(`Logged in as ${user.username}#${user.discriminator}`,this.user)
+            this.user = new ClientUser(this,user)
+            console.log(`Logged in as ${user.username}#${user.discriminator}`)
             this.emit('ready',this.user)
         })
         this.transport.on('close',((reason) => {

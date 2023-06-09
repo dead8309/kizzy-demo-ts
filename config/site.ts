@@ -12,6 +12,7 @@ export const siteConfig = {
   ],
   links: {
     github: "https://github.com/dead8309",
-    discord: 'https://discord.gg/vUPc7zzpV5'
+    discord: 'https://discord.gg/vUPc7zzpV5',
+    app: 'https://github.com/dead8309/Kizzy'
   },
 }
