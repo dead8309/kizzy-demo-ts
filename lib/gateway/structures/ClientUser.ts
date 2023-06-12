@@ -97,7 +97,7 @@ export class ClientUser {
         formattedAcitivity.metadata = {
             button_urls: button_urls
         }
-        formattedActivity.application_id = activity.application_id ?? "962990036020756480"
+        formattedAcitivity.application_id = activity.application_id ?? "962990036020756480"
     }
     if (activity.largeImageKey)
       formattedAcitivity.assets.large_image = "mp:" + activity.largeImageKey
