@@ -4,7 +4,7 @@ const INVALID_IMAGE_URL = "Invalid Url. Use discord image attachments urls only"
 const DISCORD_CDN = "https://cdn.discordapp.com"
 const DISCORD_MEDIA = "https://media.discordapp.net"
 const pattern =
-  /(https?:\/\/(?:cdn\.discordapp\.net|media\.discordapp\.net\/))/g
+  /(https?:\/\/(?:cdn\.discordapp\.com|media\.discordapp\.net\/))/g
 
 // interface for Timestamps
 const TimestampsSchema = z.object({
