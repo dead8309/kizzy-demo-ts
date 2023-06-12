@@ -1,18 +1,13 @@
 export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
-  name: "Next.js",
+  name: "Kizzy Rpc",
   description:
-    "Beautifully designed components built with Radix UI and Tailwind CSS.",
-  mainNav: [
-    {
-      title: "Home",
-      href: "/",
-    },
-  ],
+    "Rpc on The Web",
+  mainNav: [],
   links: {
-    twitter: "https://twitter.com/shadcn",
-    github: "https://github.com/shadcn/ui",
-    docs: "https://ui.shadcn.com",
+    github: "https://github.com/dead8309",
+    discord: 'https://discord.gg/vUPc7zzpV5',
+    app: 'https://github.com/dead8309/Kizzy'
   },
 }
