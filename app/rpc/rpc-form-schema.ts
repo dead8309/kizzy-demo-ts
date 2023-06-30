@@ -36,8 +36,8 @@ const AssetsSchema = z.object({
     )
     .optional()
     .transform((arg) => arg?.replace(pattern, "")),
-  /* large_text: z.string().optional(),
-    small_text: z.string().optional(), */
+	  large_text: z.string().optional(),
+    small_text: z.string().optional(),
 })
 
 const RpcFormSchema = z.object({
