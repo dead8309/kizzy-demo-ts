@@ -79,7 +79,9 @@ export function RpcForm() {
       state: values.state,
       status: values.status,
       largeImageKey: values.assets?.large_image,
+	  largeImageText: values.assets?.large_text,
       smallImageKey: values.assets?.small_image,
+	  smallImageText: values.assets?.small_text,
       button1: {
         label: values.button1_text,
         url: values.button1_url
@@ -274,6 +276,19 @@ export function RpcForm() {
               </FormItem>
             )}
           />
+		<FormField
+          control={form.control}
+          name="assets.large_text"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Large Image Text</FormLabel>
+              <FormControl>
+                <Input placeholder="" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
           <FormField
             control={form.control}
             name="assets.small_image"
@@ -287,6 +302,19 @@ export function RpcForm() {
               </FormItem>
             )}
           />
+		<FormField
+          control={form.control}
+          name="assets.small_text"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Small Image Text</FormLabel>
+              <FormControl>
+                <Input placeholder="" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
           <FormField
             control={form.control}
             name="type"
