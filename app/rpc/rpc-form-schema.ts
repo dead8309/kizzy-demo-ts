@@ -43,6 +43,7 @@ const AssetsSchema = z.object({
 const RpcFormSchema = z.object({
   name: z.string().nonempty("Activity Name is required"),
   type: z.coerce.number().int().min(0).max(5),
+  platform: z.coerce.string().optional(),
 
   details: z.string().optional(),
   status: z.enum(["online", "idle", "dnd"], {

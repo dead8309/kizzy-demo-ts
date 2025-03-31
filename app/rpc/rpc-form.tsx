@@ -37,7 +37,8 @@ export function RpcForm() {
     defaultValues: {
       name: "",
       type: 0,
-      status: 'online'
+      status: 'online',
+      platform: undefined
     },
   })
   const client = new Client()
@@ -90,8 +91,9 @@ export function RpcForm() {
         label: values.button2_text,
         url: values.button2_url
       },
-      type: values.type
-    })
+      type: values.type,
+      platform: values.platform
+    } as any)
   }
   return (
     <div>
@@ -333,6 +335,33 @@ export function RpcForm() {
                     <SelectItem value="2">Listening</SelectItem>
                     <SelectItem value="3">Watching</SelectItem>
                     <SelectItem value="5">Competing</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="platform"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Platform</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Activity Platform" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="desktop">Desktop</SelectItem>
+                    <SelectItem value="embedded">Embedded</SelectItem>
+                    <SelectItem value="samsung">Samsung</SelectItem>
+                    <SelectItem value="android">Android</SelectItem>
+                    <SelectItem value="ios">IOS</SelectItem>
+                    <SelectItem value="ps4">PlayStation 4</SelectItem>
+                    <SelectItem value="ps5">PlayStation 5</SelectItem>
+                    <SelectItem value="xbox">Xbox</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />
